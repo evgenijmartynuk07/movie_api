@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device_width, initial-scale=1">
+  {% block title %}
+    <title>Home Page</title>
+  {% endblock %}
+
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+ </head>
+
+<body>
+
+  <div>
+    {% block content %}{% endblock %}
+  </div>
+
+  <div class="p-2">
+    {% block pagination %}
+      {% include "includes/pagination.html" %}
+    {% endblock %}
+  </div>
+
+</body>
+
+</html>

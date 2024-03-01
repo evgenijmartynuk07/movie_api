@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+    <div class="alert alert-primary" role="alert"><h1>Movie List</h1></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      {% for movie in object_list %}
+      <div class="justify-content-center p-4 border border-primary">
+        <h4 class="card-body">{{ movie.title }}</h4>
+        <img src="{{ movie.poster_url }}">
+        <p>{{ movie.plot }}</p>
+        <h4>Year: {{ movie.release_year }}</h4>
+        <h4>Duration: {{ movie.duration }} min</h4>
+        <h4>Director: {{ movie.director }}</h4>
+        <h4>Actors: {% for actor in movie.actors.all %} {{ actor }},{% endfor %}</h4>
+      </div>
+        <br>
+      {% endfor %}
+    </div>
+    <div class="col-md-4">
+      <div class="ml-auto mt-auto m-sm-auto nav justify-content-end p-4 border border-primary">
+        <form method="get" action="{% url 'movie:movie-list' %}">
+          <span class="">{{ filter.form.as_p  }}
+          <button type="submit" class="btn btn-info">Apply Filter</button>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
