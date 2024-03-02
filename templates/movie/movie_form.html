@@ -1,0 +1,64 @@
+<!-- movie_create.html -->
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-lg-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Create New Movie</h2>
+          <form action="" method="post" class="m-0 p-0">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ form.title|as_crispy_field }}
+            </div>
+            <div class="form-group">
+              {{ form.release_year|as_crispy_field }}
+            </div>
+            <div class="form-group">
+              {{ form.duration|as_crispy_field }}
+            </div>
+            <div class="form-group">
+              {{ form.plot|as_crispy_field }}
+            </div>
+            <div class="form-group">
+              {{ form.poster_url|as_crispy_field }}
+            </div>
+            <div class="form-group">
+              {{ form.genres|as_crispy_field }}
+              <a href="{% url 'movie:genre-create' %}" class="btn btn-primary mt-3">Create New Genre</a>
+            </div><br>
+            <div class="form-group">
+              {{ form.actors|as_crispy_field }}
+              <a href="{% url 'movie:actor-create' %}" class="btn btn-primary mt-3">Create New Actor</a>
+            </div><br>
+            <div class="form-group">
+              {{ form.director|as_crispy_field }}
+              <a href="{% url 'movie:director-create' %}" class="btn btn-primary mt-3">Create New Director</a>
+            </div>
+
+            <button class="btn btn-success mt-3" type="submit">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Instructions</h2>
+          <div class="alert alert-info" role="alert">
+            <h5 class="alert-heading">Tips for Creating Movies</h5>
+            <p>
+              Here you can update your own movie, or create a new movie.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

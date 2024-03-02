@@ -3,13 +3,13 @@
 {% block content %}
 
 <!DOCTYPE html>
-    <div class="alert alert-primary" role="alert"><h1>Movie List</h1></div>
+  <div class="alert alert-primary" role="alert" xmlns="http://www.w3.org/1999/html"><h1>Movie List</h1></div>
 <div class="container">
   <div class="row">
     <div class="col-md-8">
       {% for movie in object_list %}
       <div class="justify-content-center p-4 border border-primary">
-        <h4 class="card-body">{{ movie.title }}</h4>
+        <a href="{% url 'movie:movie-detail' pk=movie.id %}"><h4 class="card-body">{{ movie.title }}</h4></a>
         <img src="{{ movie.poster_url }}">
         <p>{{ movie.plot }}</p>
         <h4>Year: {{ movie.release_year }}</h4>
@@ -27,7 +27,9 @@
           <button type="submit" class="btn btn-info">Apply Filter</button>
           </span>
         </form>
-      </div>
+
+      </div><br>
+      <a href="{% url 'movie:movie-create'%}" class="btn btn-success">Create new Movie</a>
     </div>
   </div>
 </div>

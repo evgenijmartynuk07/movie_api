@@ -59,7 +59,7 @@ class Movie(BaseModel):
     genres = models.ManyToManyField(Genre)
     actors = models.ManyToManyField(Actor)
 
-    director = models.ForeignKey(Director, on_delete=models.CASCADE, default=1)
+    director = models.ForeignKey(Director, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.title}"

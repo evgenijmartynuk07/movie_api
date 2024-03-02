@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
-from .models import Movie, Actor
+
+from .forms import MovieCreateForm, PersonCreateForm, ActorCreateForm, DirectorCreateForm, GenreCreateForm
+from .models import Movie, Actor, Director, Genre
 from .filters import MovieFilter
 
 
@@ -28,4 +31,56 @@ class MovieListView(generic.ListView):
         return context
 
 
+class MovieDetailView(generic.DetailView):
+    model = Movie
+    queryset = Movie.objects.prefetch_related(
+        "actors", "genres"
+    ).select_related(
+        "director"
+    )
 
+
+class MovieCreateView(generic.CreateView):
+    model = Movie
+    form_class = MovieCreateForm
+    success_url = reverse_lazy("movie:movie-list")
+
+
+class MovieUpdateView(generic.UpdateView):
+    model = Movie
+    form_class = MovieCreateForm
+    success_url = reverse_lazy("movie:movie-list")
+
+
+class MovieDeleteView(generic.DeleteView):
+    model = Movie
+
+
+class DirectorCreateView(generic.CreateView):
+    model = Director
+    form_class = DirectorCreateForm
+    success_url = reverse_lazy("movie:movie-create")
+
+
+class DirectorDeleteView(generic.DeleteView):
+    model = Director
+
+
+class ActorCreateView(generic.CreateView):
+    model = Actor
+    form_class = ActorCreateForm
+    success_url = reverse_lazy("movie:movie-create")
+
+
+class ActorDeleteView(generic.DeleteView):
+    model = Actor
+
+
+class GenreCreateView(generic.CreateView):
+    model = Genre
+    form_class = GenreCreateForm
+    success_url = reverse_lazy("movie:movie-create")
+
+
+class GenreDeleteView(generic.DeleteView):
+    model = Genre
