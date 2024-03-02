@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% block content %}
+
+<!DOCTYPE html>
+<div class="container mt-4">
+  <div class="row">
+    <ol class="list-group list-group-numbered">
+      {% for actor in object_list %}
+        <li class="list-group-item"><h5>{{ actor }} </h5><a href="{% url 'movie:actor-delete' actor.id %}" class="btn btn-danger">Delete</a></li>
+      {% endfor %}
+    </ol>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="btn btn-success mt-3" type="submit">Create</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

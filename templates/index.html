@@ -1,13 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-{% for task in num_visits %}
-<h1>{{ task.first_name }}</h1>
-{% endfor %}
-<body>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Total Visitors: {{ num_visits }}</h3>
+
+            <lu>
+               <h3>This web application allows users to perform various operations related to managing movies, directors,
+                 actors, and genres. Here are the main features of the application:</h3>
+            <li>
+              View a list of movies with filtering options.
+            </li>
+              <li>
+                View detailed information about a specific movie.
+              </li>
+              <li>
+                Create, update, and delete movies.
+              </li>
+              <li>
+              View a list of directors, actors, and genres.
+              </li>
+              <li>
+                Create, update, and delete directors, actors, and genres.
+              </li>
+            </lu><br>
+
+
+            <h1>Links</h1>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="{% url 'movie:movie-list' %}">Movie List</a></li>
+                <li class="list-group-item"><a href="{% url 'movie:director-list' %}">Director List</a></li>
+                <li class="list-group-item"><a href="{% url 'movie:actor-list' %}">Actor List</a></li>
+                <li class="list-group-item"><a href="{% url 'movie:genre-list' %}">Genre List</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h2 class="card-title">Create Links</h2>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Movie</h4>
+                    <a href="{% url 'movie:movie-create' %}" class="btn btn-primary">Create Movie</a>
+                    <hr>
+                    <h4 class="card-title">Director</h4>
+                    <a href="{% url 'movie:director-create' %}" class="btn btn-primary">Create Director</a>
+                    <hr>
+                    <h4 class="card-title">Actor</h4>
+                    <a href="{% url 'movie:actor-create' %}" class="btn btn-primary">Create Actor</a>
+                    <hr>
+                    <h4 class="card-title">Genre</h4>
+                    <a href="{% url 'movie:genre-create' %}" class="btn btn-primary">Create Genre</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

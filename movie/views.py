@@ -1,14 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import MovieCreateForm, PersonCreateForm, ActorCreateForm, DirectorCreateForm, GenreCreateForm
+from .forms import MovieCreateForm, ActorCreateForm, DirectorCreateForm, GenreCreateForm
 from .models import Movie, Actor, Director, Genre
 from .filters import MovieFilter
 
 
 def index(request):
-    return {}
+    num_visits = request.session.get("num_visits", 0)
+    request.session["num_visits"] = num_visits + 1
+
+    context = {
+        "num_visits": num_visits + 1,
+    }
+
+    return render(request, "index.html", context=context)
 
 
 class MovieListView(generic.ListView):
@@ -40,20 +47,49 @@ class MovieDetailView(generic.DetailView):
     )
 
 
-class MovieCreateView(generic.CreateView):
+class MovieCreateUpdateMixin:
     model = Movie
     form_class = MovieCreateForm
     success_url = reverse_lazy("movie:movie-list")
 
 
-class MovieUpdateView(generic.UpdateView):
-    model = Movie
-    form_class = MovieCreateForm
-    success_url = reverse_lazy("movie:movie-list")
+class MovieCreateView(MovieCreateUpdateMixin, generic.CreateView):
+    pass
+
+
+class MovieUpdateView(MovieCreateUpdateMixin, generic.UpdateView):
+    pass
 
 
 class MovieDeleteView(generic.DeleteView):
     model = Movie
+    success_url = reverse_lazy("movie:movie-list")
+
+
+class BaseCreateListView(generic.ListView):
+    paginate_by = 25
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = self.form_class()
+        return context
+
+    def post(self, request, **kwargs):
+        first_name = request.POST.get("first_name", None)
+        last_name = request.POST.get("last_name", None)
+
+        if first_name and last_name:
+            self.model.objects.create(
+                first_name=first_name,
+                last_name=last_name
+            )
+        return redirect(self.success_url)
+
+
+class DirectorListView(BaseCreateListView):
+    model = Director
+    form_class = DirectorCreateForm
+    success_url = reverse_lazy("movie:director-list")
 
 
 class DirectorCreateView(generic.CreateView):
@@ -64,6 +100,13 @@ class DirectorCreateView(generic.CreateView):
 
 class DirectorDeleteView(generic.DeleteView):
     model = Director
+    success_url = reverse_lazy("movie:director-list")
+
+
+class ActorListView(BaseCreateListView):
+    model = Actor
+    form_class = ActorCreateForm
+    success_url = reverse_lazy("movie:actor-list")
 
 
 class ActorCreateView(generic.CreateView):
@@ -74,6 +117,19 @@ class ActorCreateView(generic.CreateView):
 
 class ActorDeleteView(generic.DeleteView):
     model = Actor
+    success_url = reverse_lazy("movie:actor-list")
+
+
+class GenreListView(BaseCreateListView):
+    model = Genre
+    form_class = GenreCreateForm
+    success_url = reverse_lazy("movie:genre-list")
+
+    def post(self, request, **kwargs):
+        name = request.POST.get("name", None)
+        if name:
+            self.model.objects.create(name=name)
+        return redirect(self.success_url)
 
 
 class GenreCreateView(generic.CreateView):
@@ -84,3 +140,4 @@ class GenreCreateView(generic.CreateView):
 
 class GenreDeleteView(generic.DeleteView):
     model = Genre
+    success_url = reverse_lazy("movie:genre-list")

@@ -15,7 +15,11 @@
  </head>
 
 <body>
-
+    <div class="w-auto h-auto">
+    {% block sidebar %}
+      {% include "includes/sidebar.html" %}
+    {% endblock %}
+  </div>
   <div>
     {% block content %}{% endblock %}
   </div>
