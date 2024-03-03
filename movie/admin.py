@@ -6,7 +6,7 @@ admin.site.unregister(Group)
 
 
 @admin.register(Genre)
-class ActorAdmin(admin.ModelAdmin):
+class GenreAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 

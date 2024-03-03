@@ -1,7 +1,5 @@
-from django_filters import FilterSet, NumberFilter, ModelChoiceFilter, ModelMultipleChoiceFilter, DateFilter
+from django_filters import FilterSet, NumberFilter, ModelChoiceFilter
 from .models import Director, Actor, Movie
-from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
 
 
 class MovieFilter(FilterSet):

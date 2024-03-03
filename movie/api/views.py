@@ -37,4 +37,3 @@ class MovieViewSet(viewsets.ModelViewSet):
         if self.action == "retrieve":
             return MovieDetailSerializer
         return MovieSerializer
-

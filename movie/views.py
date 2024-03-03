@@ -2,7 +2,12 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import MovieCreateForm, ActorCreateForm, DirectorCreateForm, GenreCreateForm
+from .forms import (
+    MovieCreateForm,
+    ActorCreateForm,
+    DirectorCreateForm,
+    GenreCreateForm
+)
 from .models import Movie, Actor, Director, Genre
 from .filters import MovieFilter
 
@@ -29,7 +34,10 @@ class MovieListView(generic.ListView):
         ).prefetch_related(
             "actors",
         ).select_related("director")
-        self.filterset = self.filterset_class(self.request.GET, queryset=queryset)
+        self.filterset = self.filterset_class(
+            self.request.GET,
+            queryset=queryset
+        )
         return self.filterset.qs
 
     def get_context_data(self, **kwargs):
