@@ -59,13 +59,12 @@ The API URLs are used for programmatically accessing and manipulating data.
 
 ### URLs
 
-- `/api/`: API root.
 - `/api/movie/`: Endpoint for managing movies.
 - `/api/movie/<int:pk>/`: Endpoint for a specific movie (update, delete).
-- `/api/actors/`: Endpoint for managing actors.
-- `/api/actors/delete/<int:pk>/`: Endpoint for deleting an actor.
-- `/api/directors/`: Endpoint for managing directors.
-- `/api/directors/delete/<int:pk>/`: Endpoint for deleting a director.
-- `/api/genres/`: Endpoint for managing genres.
-- `/api/genres/delete/<int:pk>/`: Endpoint for deleting a genre.
+- `/api/movie/actors/`: Endpoint for managing actors.
+- `/api/movie/actors/delete/<int:pk>/`: Endpoint for deleting an actor.
+- `/api/movie/directors/`: Endpoint for managing directors.
+- `/api/movie/directors/delete/<int:pk>/`: Endpoint for deleting a director.
+- `/api/movie/genres/`: Endpoint for managing genres.
+- `/api/movie/genres/delete/<int:pk>/`: Endpoint for deleting a genre.
 

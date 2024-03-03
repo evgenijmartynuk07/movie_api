@@ -6,6 +6,7 @@ from ..models import Actor, Director, Genre, Movie
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            "id",
             "first_name",
             "last_name"
         )
@@ -25,6 +26,7 @@ class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = (
+            "id",
             "name",
         )
 
