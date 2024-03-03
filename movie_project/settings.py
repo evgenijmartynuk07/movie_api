@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", None)
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-)9a@%d7hj8%r0o%v=1s27l(13an)c_9o#a@c$*izg30=5hllc1")
 
 # ""
 
@@ -87,11 +87,11 @@ WSGI_APPLICATION = "movie_project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT")
+        "NAME": os.getenv("DB_NAME", "defaultdb"),
+        "USER": os.getenv("DB_USER", "doadmin"),
+        "PASSWORD": os.getenv("DB_PASSWORD", "AVNS_tb_ZPpj28xY5EQ08tEH"),
+        "HOST": os.getenv("DB_HOST", "db-mysql-fra1-bond-do-user-15946749-0.c.db.ondigitalocean.com"),
+        "PORT": os.getenv("DB_PORT", "25060")
     }
 }
 

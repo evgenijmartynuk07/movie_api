@@ -7,11 +7,11 @@ class BaseModel(models.Model):
     extra = models.JSONField(blank=True, default=dict)
     upd = models.DateTimeField(
         verbose_name='Last Updated',
-        auto_now_add=True,
+        auto_now=True,
     )
     crt = models.DateTimeField(
         verbose_name='Created',
-        auto_now=True,
+        auto_now_add=True,
     )
 
     class Meta:
@@ -51,8 +51,8 @@ class Genre(BaseModel):
 
 class Movie(BaseModel):
     title = models.CharField(max_length=100)
-    release_year = models.IntegerField()
-    duration = models.CharField(max_length=24, default="N/A")
+    release_year = models.PositiveIntegerField(blank=True, null=True)
+    duration = models.PositiveIntegerField(blank=True, null=True)
     plot = models.TextField(default="N/A")
     poster_url = models.URLField(blank=True, null=True)
 
