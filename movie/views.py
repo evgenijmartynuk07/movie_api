@@ -30,9 +30,8 @@ class MovieListView(generic.ListView):
     paginate_by = 25
 
     def get_queryset(self):
-        queryset = super().get_queryset().select_related(
-        ).prefetch_related(
-            "actors",
+        queryset = super().get_queryset().prefetch_related(
+            "actors", "genres"
         ).select_related("director")
         self.filterset = self.filterset_class(
             self.request.GET,
