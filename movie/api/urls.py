@@ -39,6 +39,7 @@ urlpatterns = [
     path("directors/", DirectorViewSet.as_view(
         {
             "get": "list",
+            "post": "create"
         }
     ), name="director-list-api"),
 
@@ -51,6 +52,7 @@ urlpatterns = [
     path("genres/", GenreViewSet.as_view(
         {
             "get": "list",
+            "post": "create"
         }
     ), name="genres-list-api"),
 
