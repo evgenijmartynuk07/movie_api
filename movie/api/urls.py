@@ -26,6 +26,7 @@ urlpatterns = [
     path("actors/", ActorViewSet.as_view(
         {
             "get": "list",
+            "post": "create"
         }
     ), name="actor-list-api"),
 
